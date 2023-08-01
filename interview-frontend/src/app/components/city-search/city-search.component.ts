@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CitySearchService } from '../../services/city-search.service';
 
 @Component({
   selector: 'app-city-search',
@@ -8,8 +9,17 @@ import { Component } from '@angular/core';
 export class CitySearchComponent {
   searchTerm!: string;
 
+  constructor(private citySearchService: CitySearchService) {}
+
   onSubmit() {
-    console.log('Search term:', this.searchTerm);
+    this.citySearchService.searchCities(this.searchTerm).subscribe({
+      next: (cities) => {
+        console.log(cities);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   clearSearch() {
