@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./city-search.component.scss']
 })
 export class CitySearchComponent {
+  searchTerm!: string;
 
+  onSubmit() {
+    console.log('Search term:', this.searchTerm);
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+  }
 }

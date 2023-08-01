@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { City } from '../../models/city.model';
 
 @Component({
   selector: 'app-city-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./city-list.component.scss']
 })
 export class CityListComponent {
-
+  @Input() cities!: City[];
 }
