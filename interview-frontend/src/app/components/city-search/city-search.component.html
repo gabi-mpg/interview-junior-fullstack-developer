@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <mat-icon>public</mat-icon>
+  <span id="title">City Search</span>
+</mat-toolbar>
+
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Search city" [(ngModel)]="searchTerm" name="searchTerm">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Search</button>
+  </form>
+</div>
+
+  
+
+  
+  
