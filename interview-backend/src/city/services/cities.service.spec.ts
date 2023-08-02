@@ -12,7 +12,6 @@ describe('CitiesService', () => {
 
   beforeEach(() => {
     service = new CitiesService();
-    // Mock the readFileSync method to return the citiesMock as the file content
     jest.spyOn(fs, 'readFileSync').mockReturnValue(JSON.stringify(citiesMock));
   });
 

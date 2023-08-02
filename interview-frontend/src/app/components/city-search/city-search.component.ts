@@ -25,12 +25,11 @@ export class CitySearchComponent {
       });
       return;
     }
-    console.log(this.searchTerm);
+
     this.citySearchService.searchCities(this.searchTerm).subscribe({
       next: (cities) => {
         this.cities = cities;
         this.isFormSubmitted = true;
-        console.log(cities);
       },
       error: (error) => {
         console.error(error);

@@ -12,7 +12,6 @@ export class CitiesController {
 
   @Get('search/:term')
   searchCities(@Param('term') term: string): any[] {
-    console.log(term);
     return this.citiesService.searchCitiesByTerm(term);
   }
 }

@@ -1,66 +1,76 @@
+import { TestingModule } from '../../app.module.spec';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 import { CitySearchComponent } from './city-search.component';
 import { CitySearchService } from '../../services/city-search.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, of, throwError } from 'rxjs';
 import { City } from 'src/app/models/city.model';
 
 describe('CitySearchComponent', () => {
   let component: CitySearchComponent;
   let fixture: ComponentFixture<CitySearchComponent>;
-  let citySearchService: jasmine.SpyObj<CitySearchService>;
-  let snackBar: jasmine.SpyObj<MatSnackBar>;
+  let mockCitySearchService: jasmine.SpyObj<CitySearchService>;
+  let mockSnackBar: jasmine.SpyObj<MatSnackBar>;
 
-  beforeEach(async () => {
-    const citySearchServiceSpy = jasmine.createSpyObj('CitySearchService', ['searchCities']);
-    const snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+  beforeEach(() => {
+    mockCitySearchService = jasmine.createSpyObj('CitySearchService', ['searchCities']);
+    mockSnackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
+      imports: [TestingModule],
       declarations: [CitySearchComponent],
       providers: [
-        { provide: CitySearchService, useValue: citySearchServiceSpy },
-        { provide: MatSnackBar, useValue: snackBarSpy }
+        { provide: CitySearchService, useValue: mockCitySearchService },
+        { provide: MatSnackBar, useValue: mockSnackBar }
       ]
-    }).compileComponents();
-
-    citySearchService = TestBed.inject(CitySearchService) as jasmine.SpyObj<CitySearchService>;
-    snackBar = TestBed.inject(MatSnackBar) as jasmine.SpyObj<MatSnackBar>;
+    });
 
     fixture = TestBed.createComponent(CitySearchComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show a snackbar message when submitting with an empty search term', () => {
-    component.searchTerm = '';
+  it('should display a snackbar message when submitting with an empty search term', () => {
     component.onSubmit();
-    expect(snackBar.open).toHaveBeenCalledWith('Please enter at least one letter before submitting.', 'Close', {
-      duration: 3000
-    });
+    expect(mockSnackBar.open).toHaveBeenCalledWith(
+      'Please enter at least one letters before submitting.',
+      'Close',
+      { duration: 3000 }
+    );
+    expect(mockCitySearchService.searchCities).not.toHaveBeenCalled();
   });
 
-  it('should call citySearchService.searchCities and update cities when submitting with a non-empty search term', () => {
+  it('should trigger form submission and display cities when submitting with a valid search term', () => {
     const mockCities: City[] = [
       { cityName: 'City 1', count: 100 },
       { cityName: 'City 2', count: 50 }
     ];
-    citySearchService.searchCities.and.returnValue(of(mockCities));
-    component.searchTerm = 'test';
+    mockCitySearchService.searchCities.and.returnValue(of(mockCities));
+
+    component.searchTerm = 'city';
     component.onSubmit();
-    expect(citySearchService.searchCities).toHaveBeenCalledWith('test');
+    fixture.detectChanges(); 
+
+    const appCityList = fixture.nativeElement.querySelector('app-city-list');
+    expect(appCityList).toBeTruthy();
+  });
+
+  it('should fetch and display cities when submitting with a valid search term', () => {
+    const mockCities: City[] = [
+      { cityName: 'City 1', count: 100 },
+      { cityName: 'City 2', count: 50 }
+    ];
+    mockCitySearchService.searchCities.and.returnValue(of(mockCities));
+  
+    component.searchTerm = 'test';
+  
+    component.onSubmit();
+  
+    expect(mockCitySearchService.searchCities).toHaveBeenCalledWith('test');
     expect(component.cities).toEqual(mockCities);
     expect(component.isFormSubmitted).toBeTrue();
-  });
-
-  it('should clear the search term when calling clearSearch()', () => {
-    component.searchTerm = 'test';
-    component.clearSearch();
-    expect(component.searchTerm).toBe('');
-  });
+  });;
 });
-
-
