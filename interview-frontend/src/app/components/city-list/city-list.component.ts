@@ -7,5 +7,16 @@ import { City } from '../../models/city.model';
   styleUrls: ['./city-list.component.scss']
 })
 export class CityListComponent {
-  @Input() cities!: City[];
+  @Input() cities: City[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+
+  get paginatedCities(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.cities.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+  }
 }

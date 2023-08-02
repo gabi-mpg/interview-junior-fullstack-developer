@@ -12,7 +12,7 @@ export class CitySearchService {
   constructor(private http: HttpClient) {}
 
   searchCities(term: string): Observable<any[]> {
-    const url = `${this.backendUrl}/cities/search?term=${term}`;
+    const url = `${this.backendUrl}/cities/search/${term}`;
     return this.http.get<any[]>(url);
   }
 }

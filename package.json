@@ -1,0 +1,29 @@
+{
+  "name": "interview-junior-fullstack-developer",
+  "version": "1.0.0",
+  "description": "Interview task for junior full stack developer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabi-mpg/interview-junior-fullstack-developer.git"
+  },
+  "keywords": [
+    "web",
+    "development",
+    "interview",
+    "task",
+    "junior",
+    "full",
+    "stack",
+    "developer"
+  ],
+  "author": "Gabriela Mercado - Erento",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabi-mpg/interview-junior-fullstack-developer/issues"
+  },
+  "homepage": "https://github.com/gabi-mpg/interview-junior-fullstack-developer#readme"
+}

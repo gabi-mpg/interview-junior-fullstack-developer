@@ -1,13 +1,12 @@
-// app.module.ts
 import { Module } from '@nestjs/common';
-import { CityController } from './city/city.controller';
-import { CityService } from './city/city.service';
+import { CitiesController } from './city/controllers/cities.controller';
+import { CitiesService } from './city/services/cities.service';
 
 @Module({
-  imports: [],
-  controllers: [CityController],
-  providers: [CityService],
+  controllers: [CitiesController],
+  providers: [CitiesService],
 })
 export class AppModule {}
+
 
 

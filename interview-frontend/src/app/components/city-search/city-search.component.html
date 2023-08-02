@@ -1,13 +1,23 @@
 <mat-toolbar>
-    <mat-icon>public</mat-icon>
-    <span id="title">City Search</span>
-  </mat-toolbar>
-  
+  <mat-icon>public</mat-icon>
+  <span id="title">City Search</span>
+</mat-toolbar>
+
+<div class="background-container">
+  <div class="background-image"></div>
   <div class="container">
-    <form (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill">
+    <h1>¿What will you find today?</h1>
+    <form (ngSubmit)="onSubmit()" class="search-form">
+      <mat-form-field appearance="fill" class="search-input">
         <input matInput placeholder="Search city" [(ngModel)]="searchTerm" name="term">
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Search</button>
+      <button mat-raised-button color="primary" type="submit" class="search-button">Search</button>
     </form>
+    <ng-container *ngIf="isFormSubmitted" >
+      <app-city-list [cities]="cities" id="cities-list"></app-city-list>
+    </ng-container>
   </div>
+</div>
+
+
+

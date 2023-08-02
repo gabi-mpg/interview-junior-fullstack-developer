@@ -1,0 +1,17 @@
+#pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.city-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.city-card {
+    flex: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
