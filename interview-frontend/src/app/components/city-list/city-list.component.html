@@ -1,16 +1,19 @@
-<h2>{{ cities.length }} results</h2>
-<div class="city-cards">
-  <div *ngFor="let city of cities | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="city-card">
-    <h3>{{ city.cityName }}</h3>
-    <p>Count: {{ city.count }}</p>
+<div *ngIf="cities.length > 0">
+  <h2>{{ cities.length }} results</h2>
+  <div class="city-cards">
+    <div *ngFor="let city of cities | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="city-card">
+      <h3>{{ city.cityName }}</h3>
+      <p>Count: {{ city.count }}</p>
+    </div>
+  </div>
+  <div id="pagination">
+    <pagination-controls (pageChange)="changePage($event)" previousLabel="Previous" nextLabel="Next" ></pagination-controls>
   </div>
 </div>
 
-<div *ngIf="cities.length === 0">
+<div *ngIf="!isFormSubmitted || cities.length === 0">
+  <h2>{{ cities.length }} results</h2>
   <p>No cities found.</p>
 </div>
 
-<div id="pagination" *ngIf="cities.length > 0">
-  <pagination-controls (pageChange)="changePage($event)" previousLabel="Previous" nextLabel="Next" ></pagination-controls>
-</div>
 

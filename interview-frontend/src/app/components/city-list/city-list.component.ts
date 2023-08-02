@@ -8,6 +8,7 @@ import { City } from '../../models/city.model';
 })
 export class CityListComponent {
   @Input() cities: City[] = [];
+  @Input() isFormSubmitted: boolean = true;
   currentPage: number = 1;
   itemsPerPage: number = 5;
 

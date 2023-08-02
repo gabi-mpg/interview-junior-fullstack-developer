@@ -39,6 +39,8 @@ export class CitySearchComponent {
 
   clearSearch() {
     this.searchTerm = '';
+    this.cities = [];
+    this.isFormSubmitted = false;
   }
 }
 

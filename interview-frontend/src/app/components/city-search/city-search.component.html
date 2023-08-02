@@ -10,14 +10,18 @@
     <form (ngSubmit)="onSubmit()" class="search-form">
       <mat-form-field appearance="fill" class="search-input">
         <input matInput placeholder="Search city" [(ngModel)]="searchTerm" name="term">
+        <button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit" class="search-button">Search</button>
     </form>
-    <ng-container *ngIf="isFormSubmitted" >
-      <app-city-list [cities]="cities" id="cities-list"></app-city-list>
+    <ng-container *ngIf="isFormSubmitted">
+      <app-city-list id="cities-list" [cities]="cities" [isFormSubmitted]="isFormSubmitted" ></app-city-list>
     </ng-container>
   </div>
 </div>
+
 
 
 
