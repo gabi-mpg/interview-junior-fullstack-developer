@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CitySearchComponent } from './city-search.component';
 import { CitySearchService } from '../../services/city-search.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { City } from 'src/app/models/city.model';
 
 describe('CitySearchComponent', () => {
@@ -36,9 +36,9 @@ describe('CitySearchComponent', () => {
   it('should display a snackbar message when submitting with an empty search term', () => {
     component.onSubmit();
     expect(mockSnackBar.open).toHaveBeenCalledWith(
-      'Please enter at least one letters before submitting.',
+      'Please enter at least one letter before submitting',
       'Close',
-      { duration: 3000 }
+      { duration: 4000 }
     );
     expect(mockCitySearchService.searchCities).not.toHaveBeenCalled();
   });

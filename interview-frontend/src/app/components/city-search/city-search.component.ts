@@ -20,8 +20,8 @@ export class CitySearchComponent {
 
   onSubmit() {
     if (!this.searchTerm || this.searchTerm.length < 1) {
-      this.snackBar.open('Please enter at least one letters before submitting.', 'Close', {
-        duration: 3000
+      this.snackBar.open('Please enter at least one letter before submitting', 'Close', {
+        duration: 4000
       });
       return;
     }

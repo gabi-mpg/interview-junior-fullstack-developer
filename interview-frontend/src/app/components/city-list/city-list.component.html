@@ -1,5 +1,5 @@
 <div *ngIf="cities.length > 0">
-  <h2>{{ cities.length }} results</h2>
+  <h2>{{ cities.length }} {{ cities.length === 1 ? 'result' : 'results' }}</h2>
   <div class="city-cards">
     <div *ngFor="let city of cities | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="city-card">
       <h3>{{ city.cityName }}</h3>
@@ -12,8 +12,8 @@
 </div>
 
 <div *ngIf="!isFormSubmitted || cities.length === 0">
-  <h2>{{ cities.length }} results</h2>
-  <p>No cities found.</p>
+  <h2>No results</h2>
+  <h3>There are no cities matches for "{{term}}"</h3>
 </div>
 
 
